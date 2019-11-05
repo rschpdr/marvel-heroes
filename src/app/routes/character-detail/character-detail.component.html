@@ -1,0 +1,17 @@
+<div class="details" *ngIf="!error && !loading">
+  <h4>{{ details.name }} Details</h4>
+
+  <div class="details__container">
+    <img class="details__thumbnail" [src]="details.thumbnail" />
+
+    <ul class="details__list">
+      <li><strong>ID: </strong> {{ details.id }}</li>
+      <li><strong>Name: </strong> {{ details.name }}</li>
+      <li><strong>Description: </strong> {{ details.description }}</li>
+    </ul>
+  </div>
+
+  <a (click)="back($event)"> Back </a>
+</div>
+<app-error-message *ngIf="error && !loading"></app-error-message>
+<app-loading-spinner *ngIf="loading"></app-loading-spinner>

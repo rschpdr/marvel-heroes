@@ -1,0 +1,30 @@
+.details {
+  padding-left: 2rem;
+
+  &__container {
+    display: flex;
+    align-items: center;
+  }
+
+  &__thumbnail {
+    max-width: 200px;
+    max-height: 200px;
+  }
+
+  &__list {
+    list-style: none;
+    display: inline-block;
+    padding-left: 1rem;
+
+    li {
+      padding: 0.5rem;
+    }
+  }
+
+  a {
+    display: block;
+    margin-top: 1rem;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+}

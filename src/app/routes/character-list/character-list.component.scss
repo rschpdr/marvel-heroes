@@ -1,0 +1,25 @@
+@import '../../../assets/variables.scss';
+
+.list-container {
+  width: 25%;
+  border: 2px solid $mainGray;
+  border-radius: 5px;
+
+  ul {
+    padding-left: 0;
+    list-style: none;
+
+    li {
+      &:hover {
+        background-color: #d3d3d3;
+      }
+
+      a {
+        display: block;
+        text-decoration: none;
+        color: $mainGray;
+        padding: 0.5rem 0.5rem 0.5rem 1rem;
+      }
+    }
+  }
+}

@@ -1,0 +1,14 @@
+<ng-container *ngIf="!loading && !error">
+  <h4>Characters</h4>
+
+  <div class="list-container">
+    <ul>
+      <li *ngFor="let character of characterList">
+        <a [routerLink]="['/character', character.id]">{{ character.name }}</a>
+      </li>
+    </ul>
+  </div>
+</ng-container>
+
+<app-error-message *ngIf="error && !loading"></app-error-message>
+<app-loading-spinner *ngIf="loading"></app-loading-spinner>
