@@ -22,10 +22,15 @@ export class HeroesService {
   ) {}
 
   defineParams() {
+    const { getTimestamp, privateKey, publicKey } = this.hashingService;
+
     const params = new HttpParams()
-      .set('ts', this.hashingService.getTimestamp())
-      .set('apikey', this.hashingService.publicKey)
-      .set('hash', this.hashingService.hashKeys());
+      .set('ts', getTimestamp())
+      .set('apikey', publicKey)
+      .set(
+        'hash',
+        this.hashingService.hashKeys(getTimestamp(), privateKey, publicKey)
+      );
     return params;
   }
 

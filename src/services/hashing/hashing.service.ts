@@ -16,10 +16,8 @@ export class HashingService {
     return Date.now().toString();
   }
 
-  hashKeys() {
-    const stringToBeHashed = `${this.getTimestamp()}${this.privateKey}${
-      this.publicKey
-    }`;
+  hashKeys(ts, privateKey, publicKey) {
+    const stringToBeHashed = `${ts}${privateKey}${publicKey}`;
     const result = Md5.hashStr(stringToBeHashed, false);
     return result.toString();
   }
