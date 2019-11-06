@@ -30,8 +30,6 @@ export class CharacterListComponent implements OnInit {
         this.characterList = [...characters];
 
         this.loading = false;
-
-        console.log(this.characterList);
       },
       err => {
         this.error = true;

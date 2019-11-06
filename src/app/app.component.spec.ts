@@ -1,35 +1,23 @@
-import { TestBed, async } from '@angular/core/testing';
-import { RouterTestingModule } from '@angular/router/testing';
+import { LoadingSpinnerComponent } from './components/loading-spinner/loading-spinner.component';
+import { ErrorMessageComponent } from './components/error-message/error-message.component';
+import { CharacterListComponent } from './routes/character-list/character-list.component';
+import { CharacterDetailComponent } from './routes/character-detail/character-detail.component';
 import { AppComponent } from './app.component';
+import { render } from '@testing-library/angular';
 
-describe('AppComponent', () => {
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      imports: [
-        RouterTestingModule
-      ],
-      declarations: [
-        AppComponent
-      ],
-    }).compileComponents();
-  }));
-
-  it('should create the app', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.debugElement.componentInstance;
-    expect(app).toBeTruthy();
+it('Should render without crashing', async () => {
+  const component = await render(AppComponent, {
+    declarations: [
+      CharacterDetailComponent,
+      CharacterListComponent,
+      ErrorMessageComponent,
+      LoadingSpinnerComponent
+    ],
+    routes: [
+      { path: '', component: CharacterListComponent },
+      { path: 'character/:id', component: CharacterDetailComponent }
+    ]
   });
 
-  it(`should have as title 'marvel-heroes'`, () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.debugElement.componentInstance;
-    expect(app.title).toEqual('marvel-heroes');
-  });
-
-  it('should render title', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('.content span').textContent).toContain('marvel-heroes app is running!');
-  });
+  expect(component).toBeDefined();
 });

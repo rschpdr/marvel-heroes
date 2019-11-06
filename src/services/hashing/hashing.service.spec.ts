@@ -8,6 +8,10 @@ beforeEach(() => {
   hashingService = new HashingService();
 });
 
+it('Should create an instance without crashing', () => {
+  expect(hashingService).toBeDefined();
+});
+
 it('Returns a timestamp string', async () => {
   const spy = jest.spyOn(hashingService, 'getTimestamp');
   spy.mockReturnValue('1572994453');

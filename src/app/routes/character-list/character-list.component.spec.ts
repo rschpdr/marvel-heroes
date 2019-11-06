@@ -1,25 +1,36 @@
-// import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
+import { of } from 'rxjs';
+import { render } from '@testing-library/angular';
+import { createMock } from '@testing-library/angular/jest-utils';
 
-// import { CharacterListComponent } from './character-list.component';
+import { HeroesService } from './../../../services/heroes/heroes.service';
+import { CharacterListComponent } from './character-list.component';
+import { LoadingSpinnerComponent } from './../../components/loading-spinner/loading-spinner.component';
+import { ErrorMessageComponent } from './../../components/error-message/error-message.component';
 
-// describe('CharacterListComponent', () => {
-//   let component: CharacterListComponent;
-//   let fixture: ComponentFixture<CharacterListComponent>;
+const service = createMock(HeroesService);
 
-//   beforeEach(async(() => {
-//     TestBed.configureTestingModule({
-//       declarations: [ CharacterListComponent ]
-//     })
-//     .compileComponents();
-//   }));
+const mockResponse = {
+  data: {
+    results: [{ id: 1, name: 'John Doe' }, { id: 2, name: 'Dohn Joe' }]
+  }
+};
 
-//   beforeEach(() => {
-//     fixture = TestBed.createComponent(CharacterListComponent);
-//     component = fixture.componentInstance;
-//     fixture.detectChanges();
-//   });
+service.fetchHeroes.mockImplementation(() => of(mockResponse));
 
-//   it('should create', () => {
-//     expect(component).toBeTruthy();
-//   });
-// });
+it('Should render without crashing', async () => {
+  const { getByText } = await render(CharacterListComponent, {
+    componentProviders: [
+      {
+        provide: HeroesService,
+        useValue: service
+      }
+    ],
+    declarations: [LoadingSpinnerComponent, ErrorMessageComponent],
+    imports: [RouterTestingModule]
+  });
+
+  expect(getByText('Characters'));
+
+  expect(getByText('John Doe'));
+});
